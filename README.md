@@ -1,6 +1,3 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/moltenlabs/glyphs/main/.github/assets/banner.png" alt="Glyphs" width="100%" />
-</p>
 
 <h1 align="center">✨ Glyphs</h1>
 
