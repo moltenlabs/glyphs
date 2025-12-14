@@ -10,7 +10,7 @@ use std::fmt;
 /// # Example
 ///
 /// ```rust
-/// use sigil::{style, Color};
+/// use molten_sigil::{style, Color};
 ///
 /// let s = style("Hello")
 ///     .fg(Color::Red)

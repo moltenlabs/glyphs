@@ -1,17 +1,17 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/moltenlabs/sigil/main/.github/assets/banner.png" alt="Sigil" width="100%" />
+  <img src="https://raw.githubusercontent.com/moltenlabs/molten-sigil/main/.github/assets/banner.png" alt="Molten Sigil" width="100%" />
 </p>
 
-<h1 align="center">✨ Sigil</h1>
+<h1 align="center">✨ Molten Sigil</h1>
 
 <p align="center">
   <strong>Human-readable ANSI escape sequences for Rust.</strong>
 </p>
 
 <p align="center">
-  <a href="https://crates.io/crates/sigil"><img src="https://img.shields.io/crates/v/sigil.svg?style=flat-square&logo=rust" alt="Crates.io"></a>
-  <a href="https://docs.rs/sigil"><img src="https://img.shields.io/docsrs/sigil?style=flat-square&logo=docs.rs" alt="Documentation"></a>
-  <a href="https://github.com/moltenlabs/sigil/actions"><img src="https://img.shields.io/github/actions/workflow/status/moltenlabs/sigil/ci.yml?style=flat-square&logo=github" alt="CI"></a>
+  <a href="https://crates.io/crates/molten_sigil"><img src="https://img.shields.io/crates/v/molten_sigil.svg?style=flat-square&logo=rust" alt="Crates.io"></a>
+  <a href="https://docs.rs/molten_sigil"><img src="https://img.shields.io/docsrs/molten_sigil?style=flat-square&logo=docs.rs" alt="Documentation"></a>
+  <a href="https://github.com/moltenlabs/molten-sigil/actions"><img src="https://img.shields.io/github/actions/workflow/status/moltenlabs/molten-sigil/ci.yml?style=flat-square&logo=github" alt="CI"></a>
   <a href="#license"><img src="https://img.shields.io/badge/license-MIT%2FApache--2.0-blue?style=flat-square" alt="License"></a>
 </p>
 
@@ -25,9 +25,9 @@
 
 ---
 
-## What is Sigil?
+## What is Molten Sigil?
 
-**Sigil** is a Rust library for working with ANSI escape sequences. It lets you:
+**Molten Sigil** is a Rust library for working with ANSI escape sequences. It lets you:
 
 1. **Style terminal output** with a fluent, type-safe API
 2. **Parse existing sequences** into human-readable descriptions
@@ -37,7 +37,7 @@
 Think of it as the Rust equivalent of [sequin](https://github.com/charmbracelet/sequin) from Charmbracelet.
 
 ```rust
-use sigil::{style, Color, parse};
+use molten_sigil::{style, Color, parse};
 
 // Style text beautifully
 let output = style("Hello, Terminal!")
@@ -112,21 +112,21 @@ visible_len("\x1b[31mHello\x1b[0m") // 5
 ## Installation
 
 ```bash
-cargo add sigil
+cargo add molten_sigil
 ```
 
 Or add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-sigil = "0.1"
+molten_sigil = "0.1"
 ```
 
 ### With Molten Brand Colors
 
 ```toml
 [dependencies]
-sigil = { version = "0.1", features = ["brand"] }
+molten_sigil = { version = "0.1", features = ["brand"] }
 ```
 
 ---
@@ -136,7 +136,7 @@ sigil = { version = "0.1", features = ["brand"] }
 ### Basic Styling
 
 ```rust
-use sigil::{style, Color};
+use molten_sigil::{style, Color};
 
 // Simple colors
 let red = style("Error!").fg(Color::Red).to_string();
@@ -161,7 +161,7 @@ let palette = style("Palette")
 ### Text Modifiers
 
 ```rust
-use sigil::{style, Color};
+use molten_sigil::{style, Color};
 
 let styled = style("Important")
     .bold()           // Bold text
@@ -177,7 +177,7 @@ let styled = style("Important")
 ### Combining Styles
 
 ```rust
-use sigil::{style, Color};
+use molten_sigil::{style, Color};
 
 let fancy = style("🔥 Molten Labs")
     .fg(Color::rgb(249, 115, 22))
@@ -197,7 +197,7 @@ println!("{}", fancy);
 Turn cryptic escape codes into readable descriptions:
 
 ```rust
-use sigil::{parse, ParsedSequence};
+use molten_sigil::{parse, ParsedSequence};
 
 let input = "\x1b[1;38;2;249;115;22mMolten\x1b[0m";
 
@@ -217,7 +217,7 @@ for segment in parse(input) {
 ### Strip ANSI Codes
 
 ```rust
-use sigil::strip_ansi;
+use molten_sigil::strip_ansi;
 
 let styled = "\x1b[1;31mBold Red\x1b[0m Normal";
 let plain = strip_ansi(styled);
@@ -227,7 +227,7 @@ assert_eq!(plain, "Bold Red Normal");
 ### Get Visible Length
 
 ```rust
-use sigil::visible_len;
+use molten_sigil::visible_len;
 
 let styled = "\x1b[31mHello\x1b[0m";
 assert_eq!(visible_len(styled), 5);  // Not 14!
@@ -240,7 +240,7 @@ assert_eq!(visible_len(styled), 5);  // Not 14!
 ### Cursor Movement
 
 ```rust
-use sigil::cursor;
+use molten_sigil::cursor;
 
 // Move cursor
 print!("{}", cursor::up(5));      // Move up 5 lines
@@ -256,7 +256,7 @@ print!("{}", cursor::column(1));      // Start of line
 ### Screen Control
 
 ```rust
-use sigil::sequences;
+use molten_sigil::sequences;
 
 // Clear screen
 print!("{}", sequences::CLEAR_SCREEN);
@@ -271,24 +271,6 @@ print!("{}", sequences::CURSOR_SHOW);
 print!("{}", sequences::ALT_SCREEN_ENTER);
 // ... your TUI ...
 print!("{}", sequences::ALT_SCREEN_EXIT);
-```
-
----
-
-## With Molten Brand
-
-Enable the `brand` feature for pre-defined brand colors:
-
-```rust
-use sigil::{style, brand};
-
-// Molten Labs brand colors
-let molten = style("Molten").fg(brand::MOLTEN).bold();
-let goblin = style("Goblin").fg(brand::GOBLIN);
-let success = style("Success").fg(brand::SUCCESS);
-let error = style("Error").fg(brand::ERROR);
-
-println!("{} {} {} {}", molten, goblin, success, error);
 ```
 
 ---
@@ -344,20 +326,20 @@ Color::ansi256(255)   // White
 
 ## Ecosystem
 
-Sigil is part of the **Molten Labs** open source ecosystem:
+Molten Sigil is part of the **Molten Labs** open source ecosystem:
 
 | Crate | Description | Status |
 |-------|-------------|--------|
-| **[molten-brand](https://github.com/moltenlabs/molten-brand)** | Design tokens & colors | ✅ Released |
-| **[sigil](https://github.com/moltenlabs/sigil)** | ANSI sequences (you are here) | ✅ Released |
-| **[lacquer](https://github.com/moltenlabs/lacquer)** | Terminal styling (like lipgloss) | 🚧 Coming Soon |
-| **[cauldron](https://github.com/moltenlabs/cauldron)** | TUI framework (like bubbletea) | 📋 Planned |
+| **[molten_brand](https://crates.io/crates/molten_brand)** | Design tokens & colors | ✅ Published |
+| **[molten_sigil](https://crates.io/crates/molten_sigil)** | ANSI sequences (you are here) | ✅ Published |
+| **[lacquer](https://crates.io/crates/lacquer)** | Terminal styling (like lipgloss) | ✅ Published |
+| **cauldron** | TUI framework (like bubbletea) | 📋 Planned |
 
 ---
 
 ## Why "Sigil"?
 
-In fantasy lore, a **sigil** is a magical symbol or mark. In Sigil, ANSI escape sequences are the magical marks that transform plain text into beautiful terminal output. ✨
+In fantasy lore, a **sigil** is a magical symbol or mark. In Molten Sigil, ANSI escape sequences are the magical marks that transform plain text into beautiful terminal output. ✨
 
 ---
 
@@ -375,8 +357,8 @@ In fantasy lore, a **sigil** is a magical symbol or mark. In Sigil, ANSI escape 
 We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ```bash
-git clone https://github.com/moltenlabs/sigil
-cd sigil
+git clone https://github.com/moltenlabs/molten-sigil
+cd molten-sigil
 cargo test
 ```
 

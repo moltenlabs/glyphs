@@ -38,13 +38,13 @@ impl ParsedSequence {
 /// # Example
 ///
 /// ```rust
-/// use sigil::parse;
+/// use molten_sigil::parse;
 ///
 /// let segments = parse("\x1b[31mRed\x1b[0m text");
 /// for segment in segments {
 ///     match segment {
-///         sigil::ParsedSequence::Text(t) => println!("Text: {}", t),
-///         sigil::ParsedSequence::Escape(e) => println!("Escape: {}", e),
+///         molten_sigil::ParsedSequence::Text(t) => println!("Text: {}", t),
+///         molten_sigil::ParsedSequence::Escape(e) => println!("Escape: {}", e),
 ///     }
 /// }
 /// ```
